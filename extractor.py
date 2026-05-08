@@ -2,10 +2,10 @@ import google.generativeai as genai
 import streamlit as st
 import json
 
-# Configure Gemini API securely
-genai.configure(api_key=st.secrets["AIzaSyAP2xfatGI7bT0m0YEf8hsoJnvmsmIco_U"])
+# Configure Gemini API securely (Streamlit Cloud)
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-# Load Gemini model
+# Load model
 model = genai.GenerativeModel("models/gemini-2.5-flash")
 
 
@@ -16,7 +16,7 @@ def extract_invoice_data(text):
 
     Extract invoice details from the provided invoice text.
 
-    Return ONLY valid JSON in this exact format:
+    Return ONLY valid JSON in this format:
 
     {{
         "invoice_number": "",
@@ -31,7 +31,6 @@ def extract_invoice_data(text):
     - No explanation text
     - If a value is missing, return null
     - total_amount must be numeric only
-    - Do not include currency symbols
 
     Invoice Text:
     {text}
@@ -42,7 +41,6 @@ def extract_invoice_data(text):
 
         cleaned_response = response.text.strip()
 
-        # Convert JSON string to Python dictionary
         data = json.loads(cleaned_response)
 
         return data
