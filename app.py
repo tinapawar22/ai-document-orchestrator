@@ -1,7 +1,7 @@
 import streamlit as st
 from PyPDF2 import PdfReader
 from extractor import extract_invoice_data
-from workflow import trigger_workflow
+from workflows import trigger_workflow
 
 # Page configuration
 st.set_page_config(page_title="AI Document Orchestrator")
