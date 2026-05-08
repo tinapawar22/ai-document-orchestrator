@@ -1,6 +1,13 @@
-import streamlit as st
 import requests
+import streamlit as st
 
 def trigger_workflow(data):
+
     webhook_url = st.secrets["WEBHOOK_URL"]
-    return requests.post(webhook_url, json=data).status_code
+
+    response = requests.post(
+        webhook_url,
+        json=data
+    )
+
+    return response.status_code
